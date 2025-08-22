@@ -28,6 +28,8 @@ const {
   lsSync,
 } = require("./clean-jsdoc-theme-helper");
 
+const i18n = require("./helpers/i18n");
+
 const {
   HTML_MINIFY_OPTIONS,
   SECTION_TYPE,
@@ -323,6 +325,8 @@ async function generate(title, docs, filename, resolveLinks) {
     title: title,
     docs: docs,
     filename,
+    t: i18n.t,
+    currentLanguage: i18n.getCurrentLanguage(),
   };
 
   outpath = path.join(outdir, filename);
@@ -642,6 +646,10 @@ function buildSidebar(members) {
     @param {Tutorial} tutorials
  */
 exports.publish = async function (taffyData, opts, tutorials) {
+  // Initialize i18n system
+  const language = (opts && opts.theme_opts && opts.theme_opts.language) || 'en';
+  i18n.init({ language });
+
   let classes;
   let conf;
   let externals;
@@ -876,6 +884,12 @@ exports.publish = async function (taffyData, opts, tutorials) {
   view.includeCss = includeCss(themeOpts, outdir);
   view.meta = getMetaTagData(themeOpts);
   view.theme = getTheme(themeOpts);
+  // Add i18n function to view
+  view.t = i18n.t;
+  view.currentLanguage = i18n.getCurrentLanguage();
+  
+  // Make t function globally available in templates
+  global.t = i18n.t;
   // once for all
   view.sidebar = buildSidebar(members);
   view.navbar = buildNavbar(themeOpts);

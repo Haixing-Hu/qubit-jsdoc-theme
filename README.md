@@ -187,7 +187,27 @@ To set the default theme, add the following in your JSDoc config file:
 
 If you set default theme as `"fallback-dark"`, then `clean-jsdoc-theme` will try to detect user's preferred color scheme. If it will detect successfully then it will set user's preferred theme else fallback to dark theme.
 
-Same if you set default theme as `"fallback-light"`, it will try to detect user's preferred theme. If not then fallback to light theme.
+### Set language (i18n)
+
+To set the documentation language, add the following in your JSDoc config file:
+
+```json
+"theme_opts": {
+  "language": "en" // "en" for English, "zh" for Chinese
+}
+```
+
+Supported languages:
+- `"en"` - English (default)
+- `"zh"` - Chinese (中文)
+
+The language setting affects:
+- Section headings (Properties, Methods, Constructor, etc.)
+- Table headers (Name, Type, Description, etc.)
+- Button tooltips and aria-labels
+- Parameter attributes (optional, nullable, repeatable)
+
+If no language is specified, English will be used as the default.
 
 ### Set base url
 

@@ -512,29 +512,7 @@ function fontSizeTooltip() {
 
 function initTooltip() {
   // add tooltip to navbar item
-  // eslint-disable-next-line no-undef
-  tippy(".home-button", {
-    content: "Go to Homepage",
-    delay: 500,
-  });
-
-  // eslint-disable-next-line no-undef
-  tippy(".theme-toggle", {
-    content: "Toggle Theme",
-    delay: 500,
-  });
-
-  // eslint-disable-next-line no-undef
-  tippy(".search-button", {
-    content: "Search",
-    delay: 500,
-  });
-
-  // eslint-disable-next-line no-undef
-  tippy(".font-size", {
-    content: "Change font size",
-    delay: 500,
-  });
+  // Tooltips are now initialized via i18n-tooltips.tmpl template
 
   // eslint-disable-next-line no-undef
   tippy(".codepen-button", {

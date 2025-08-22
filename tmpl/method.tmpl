@@ -18,7 +18,7 @@ var self = this;
 ?>
 <?js if (data.kind !== 'module' && !data.hideconstructor) { ?>
     <?js if (data.kind === 'class' && data.classdesc && hasExplicitConstructor) { ?>
-        <h2 id="constructor" class="has-anchor">Constructor</h2>
+        <h2 id="constructor" class="has-anchor"><?js= t('constructor') ?></h2>
     <?js } ?>
 
     <?js if (data.kind !== 'class' || hasExplicitConstructor) { ?>
@@ -40,7 +40,7 @@ var self = this;
 
 <?js if (data.augments && data.alias && data.alias.indexOf('module:') === 0) { ?>
     <div class="method-member-container mt-20">
-    <strong>Extends:</strong>
+    <strong><?js= t('extends') ?>:</strong>
     <?js= self.partial('augments.tmpl', data) ?>
     </div>
 <?js } ?>
@@ -48,7 +48,7 @@ var self = this;
 
 <?js if (kind === 'event' && data.type && data.type.names) {?>
     <div class="method-member-container mt-20">
-    <strong>Type:</strong>
+    <strong><?js= t('type') ?>:</strong>
     <ul>
         <li>
             <?js= self.partial('type.tmpl', data.type.names) ?>
