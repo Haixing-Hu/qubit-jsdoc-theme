@@ -11,6 +11,11 @@
     }
 ?>
 <?js if (doc.kind === 'mainpage' || (doc.kind === 'package')) { ?>
+    <?js if (packageInfo && packageInfo.version) { ?>
+        <div class="package-version-info">
+            <p class="package-version"><?js= t('version') ?>: v<?js= packageInfo.version ?></p>
+        </div>
+    <?js } ?>
     <?js= self.partial('mainpage.tmpl', doc) ?>
 <?js } else if (doc.kind === 'source') { ?>
     <?js= self.partial('source.tmpl', doc) ?>
@@ -41,6 +46,9 @@
                 <h1 id="<?js= module.name ?>-title" class="has-anchor">
                     <?js= module.name ?>
                 </h1>
+                <?js if (module.version) { ?>
+                    <p class="module-version"><?js= t('version') ?>: v<?js= module.version ?></p>
+                <?js } ?>
             <?js } ?>
             <?js if (module.classdesc) { ?>
                 <div class="class-description"><?js= module.classdesc ?></div>

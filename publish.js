@@ -327,6 +327,7 @@ async function generate(title, docs, filename, resolveLinks) {
     filename,
     t: i18n.t,
     currentLanguage: i18n.getCurrentLanguage(),
+    packageInfo: packageInfo,
   };
 
   outpath = path.join(outdir, filename);

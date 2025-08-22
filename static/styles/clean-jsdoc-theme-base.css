@@ -236,6 +236,21 @@ dt {
 	font-style: normal;
 }
 
+/* Package and module version styling */
+
+.package-version-info,
+.module-version {
+	color: var(--text-color-secondary);
+	font-size: 0.875rem;
+	margin: 0.5rem 0 1rem 0;
+}
+
+.package-version,
+.module-version {
+	font-weight: 500;
+	margin: 0;
+}
+
 /* Style the author container to look like inline text */
 
 .details .tag-author.bold {
@@ -372,7 +387,7 @@ h4.name {
 .props,
 table {
 	border-collapse: separate;
-	border-radius: 0.25rem;
+	border-radius: 0.5rem;
 	border-spacing: 0 0.5rem;
 	font-size: 0.875rem;
 	margin: 0;
@@ -385,8 +400,8 @@ table td:first-child,
 table thead th:first-child,
 .params thead th:first-child,
 .props thead th:first-child {
-	border-bottom-left-radius: 0.25rem;
-	border-top-left-radius: 0.25rem;
+	border-bottom-left-radius: 0.5rem;
+	border-top-left-radius: 0.5rem;
 
 }
 
@@ -395,8 +410,8 @@ table td:last-child,
 table thead th:last-child,
 .params thead th:last-child,
 .props thead th:last-child {
-	border-bottom-right-radius: 0.25rem;
-	border-top-right-radius: 0.25rem;
+	border-bottom-right-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
 
 }
 
