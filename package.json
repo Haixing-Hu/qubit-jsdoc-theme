@@ -1,0 +1,74 @@
+{
+    "name": "@qubit-ltd/jsdoc-theme",
+    "version": "1.0.0",
+    "description": "A customized JSDoc theme based on clean-jsdoc-theme, enhanced with properties table and constructor detection features for Qubit projects.",
+    "main": "publish.js",
+    "author": "Haixing Hu (starfish.hu@gmail.com)",
+    "license": "Apache-2.0",
+    "scripts": {
+        "build": "node minify.js",
+        "build:demo": "node minify.js && node node_modules/jsdoc/jsdoc.js -c jsdoc-config.json",
+        "lint:js": "eslint . --ext .js --fix",
+        "lint:style": "stylelint-config-prettier-check && stylelint static/styles/",
+        "lint": "npm run lint:js && npm run lint:style",
+        "prepublishOnly": "npm run lint && npm run build",
+        "deploy": "npm publish --registry='https://npm.qubit.ltd/'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Haixing-Hu/qubit-jsdoc-theme.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues"
+    },
+    "homepage": "https://github.com/Haixing-Hu/qubit-jsdoc-theme",
+    "files": [
+        "publish.js",
+        "tmpl/**/*",
+        "static/**/*",
+        "helpers/**/*",
+        "clean-jsdoc-theme-defaults.js",
+        "clean-jsdoc-theme-helper.js",
+        "LICENSE",
+        "README.md",
+        "CHANGELOG.md"
+    ],
+    "peerDependencies": {
+        "jsdoc": ">=3.x <=4.x"
+    },
+    "keywords": [
+        "jsdoc",
+        "template",
+        "jsdoc-template",
+        "javascript documentation",
+        "qubit",
+        "properties table",
+        "constructor detection",
+        "customizable jsdoc theme"
+    ],
+    "devDependencies": {
+        "@jsdoc/eslint-config": "^1.1.6",
+        "concurrently": "^7.2.2",
+        "csso": "^5.0.3",
+        "eslint": "^8.19.0",
+        "eslint-config-prettier": "^8.5.0",
+        "jsdoc": "^4.0.4",
+        "prettier": "^2.2.1",
+        "stylelint": "^14.9.1",
+        "stylelint-config-prettier": "^9.0.3",
+        "stylelint-config-sass-guidelines": "^9.0.0",
+        "stylelint-config-standard": "^26.0.0",
+        "stylelint-order": "^5.0.0",
+        "stylelint-scss": "^4.2.0",
+        "uglify-js": "^3.16.0"
+    },
+    "dependencies": {
+        "@jsdoc/salty": "^0.2.4",
+        "fs-extra": "^10.1.0",
+        "html-minifier-terser": "^7.2.0",
+        "klaw-sync": "^6.0.0",
+        "lodash": "^4.17.21",
+        "showdown": "^2.1.0"
+    },
+    "packageManager": "yarn@4.9.3"
+}
