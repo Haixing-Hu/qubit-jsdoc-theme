@@ -603,13 +603,40 @@ code {
 .sidebar-section-children a {
 	display: block;
 	padding: 0.25rem 2rem;
+	text-decoration: none;
 	width: 100%;
 
 }
 
-.sidebar-section-children a {
-	text-decoration: none;
+/* Sidebar home link styling */
 
+.sidebar-home-link {
+	border-bottom: 1px solid var(--border-color);
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+}
+
+.sidebar-home-anchor {
+	align-items: center;
+	border-radius: 0.5rem;
+	display: flex;
+	font-family: heading;
+	font-size: 1rem;
+	font-weight: 600;
+	gap: 0.5rem;
+	padding: 0.75rem 2rem;
+	text-decoration: none;
+	transition: background-color 0.2s;
+	width: 100%;
+}
+
+.sidebar-home-anchor:hover {
+	background-color: var(--sidebar-item-hover-bg);
+}
+
+.sidebar-home-anchor .home-icon {
+	height: 1rem;
+	width: 1rem;
 }
 
 .with-arrow[data-isopen='false'] + .sidebar-section-children-container {
