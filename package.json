@@ -12,7 +12,7 @@
         "lint:style": "stylelint-config-prettier-check && stylelint static/styles/",
         "lint": "npm run lint:js && npm run lint:style",
         "prepublishOnly": "npm run lint && npm run build",
-        "deploy": "npm publish --registry='https://npm.qubit.ltd/'"
+        "deploy": "npm run build && npm publish --registry='https://npm.qubit.ltd/'"
     },
     "repository": {
         "type": "git",
