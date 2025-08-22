@@ -610,26 +610,12 @@ code {
 
 /* Sidebar home link styling */
 
-.sidebar-home-link {
-	margin-bottom: 0.5rem;
-}
-
 .sidebar-home-anchor {
 	align-items: center;
-	border-radius: 1rem;
 	display: flex;
-	font-family: heading;
-	font-size: 1.25rem;
-	font-weight: normal;
 	gap: 0.5rem;
-	padding: 0.5rem 2rem;
 	text-decoration: none;
-	transition: background-color 0.2s;
 	width: 100%;
-}
-
-.sidebar-home-anchor:hover {
-	background-color: var(--sidebar-item-hover-bg);
 }
 
 .sidebar-home-anchor .home-icon {
