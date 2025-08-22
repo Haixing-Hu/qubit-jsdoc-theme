@@ -372,7 +372,7 @@ h4.name {
 .props,
 table {
 	border-collapse: separate;
-	border-radius: 0;
+	border-radius: 0.25rem;
 	border-spacing: 0 0.5rem;
 	font-size: 0.875rem;
 	margin: 0;
@@ -385,8 +385,8 @@ table td:first-child,
 table thead th:first-child,
 .params thead th:first-child,
 .props thead th:first-child {
-	border-bottom-left-radius: 0;
-	border-top-left-radius: 0;
+	border-bottom-left-radius: 0.25rem;
+	border-top-left-radius: 0.25rem;
 
 }
 
@@ -395,8 +395,8 @@ table td:last-child,
 table thead th:last-child,
 .params thead th:last-child,
 .props thead th:last-child {
-	border-bottom-right-radius: 0;
-	border-top-right-radius: 0;
+	border-bottom-right-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
 
 }
 
