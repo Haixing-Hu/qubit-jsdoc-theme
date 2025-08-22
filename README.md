@@ -1,28 +1,38 @@
-# clean-jsdoc-theme
+# qubit-jsdoc-theme
 
-[![Stars](https://img.shields.io/github/stars/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-4.3.0-005bff) [![Issues Open](https://img.shields.io/github/issues/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/ankitskvmdam/clean-jsdoc-theme)](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/LICENSE)
+[![Stars](https://img.shields.io/github/stars/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-1.0.0-005bff) [![Issues Open](https://img.shields.io/github/issues/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/blob/master/LICENSE)
 <br>
 
-`clean-jsdoc-theme` enhances your JSDoc 3 or 4 documentation with a beautiful and responsive design. It offers a variety of customization options to tailor the look and feel to your preferences.
+**Based on [clean-jsdoc-theme](https://github.com/ankitskvmdam/clean-jsdoc-theme) v4.3.0**
 
-## Key Features
+`qubit-jsdoc-theme` is a customized version of the popular `clean-jsdoc-theme` that enhances your JSDoc 3 or 4 documentation with additional features specifically designed for better class documentation. It maintains all the beautiful and responsive design features of the original theme while adding enhanced property documentation capabilities.
 
-- **Widespread Device Compatibility:** `clean-jsdoc-theme` adapts seamlessly to desktops, laptops, tablets, and mobile devices, ensuring a smooth user experience across all platforms.
+## Enhanced Features (New in qubit-jsdoc-theme)
+
+- **🆕 Smart Properties Table:** Automatically generates a dedicated "Properties" section for classes, displaying all class properties in a clean table format with type information and descriptions derived from individual field JSDoc comments.
+- **🆕 Intelligent Constructor Detection:** Only displays the "Constructor" section when a class has explicit constructor documentation, avoiding empty constructor sections for classes without custom constructors.
+- **🆕 Field-Level JSDoc Support:** Properties table is populated directly from `@type` annotations on individual class fields, eliminating the need for redundant `@property` tags in class-level JSDoc.
+- **🆕 Clean Member Organization:** Properties are displayed in their own dedicated section, while the "Members" section can be configured to show only methods, avoiding duplication.
+
+## Key Features (Inherited from clean-jsdoc-theme)
+
+- **Widespread Device Compatibility:** Adapts seamlessly to desktops, laptops, tablets, and mobile devices, ensuring a smooth user experience across all platforms.
 - **Premium Aesthetics:** Choose between a sleek dark theme or a bright light theme, both designed to deliver a high-quality appearance for your documentation.
-- **Optimized File Size:** `clean-jsdoc-theme` automatically minifies the generated HTML files, reducing their overall size by several kilobytes without compromising functionality.
+- **Optimized File Size:** Automatically minifies the generated HTML files, reducing their overall size by several kilobytes without compromising functionality.
 - **Robust Search Functionality:** The built-in search feature allows users to quickly find specific information within your documentation, and it does so without adding extra weight to the output files.
-- **Regular Updates:** We actively maintain `clean-jsdoc-theme`, ensuring it remains up-to-date and compatible with the latest technologies.
-- **Exceptional Performance:** `clean-jsdoc-theme` prioritizes performance, delivering a fast and responsive user experience for your documentation consumers. You can view the [Lighthouse report](https://googlechrome.github.io/lighthouse/viewer/?psiurl=https%3A%2F%2Fankdev.me%2Fclean-jsdoc-theme%2Fv4%2Findex.html&strategy=desktop&category=performance&category=accessibility&category=best-practices&category=seo&category=pwa&utm_source=lh-chrome-ext#) for a detailed performance analysis.
-- **Open Communication:** The `clean-jsdoc-theme` team acknowledges that continuous improvement is essential. We welcome feedback from the community, so feel free to share your suggestions, questions, or bug reports by creating an issue on [GitHub](https://github.com/ankitskvmdam/clean-jsdoc-theme/issues).
+- **Exceptional Performance:** Prioritizes performance, delivering a fast and responsive user experience for your documentation consumers.
+- **Extensive Customization:** Offers a wide variety of customization options to tailor the look and feel to your preferences.
 
 
 ## Demo
 
-1. To view this theme, visit [https://ankdev.me/clean-jsdoc-theme/v4](https://ankdev.me/clean-jsdoc-theme/v4).
+The enhanced features of `qubit-jsdoc-theme` include:
 
-2. If you want to see a demo repo to set up this theme,
-   visit [clean-jsdoc-theme-example](https://github.com/ankitskvmdam/clean-jsdoc-theme-example). This repo will guide
-   you step by step on how to set up JSDoc and `clean-jsdoc-theme` in your existing repo.
+1. **Smart Properties Table**: Automatically generated from field-level `@type` annotations
+2. **Intelligent Constructor Detection**: Only shows constructor section when explicitly documented
+3. **Clean Organization**: Properties and methods are clearly separated
+
+For the base theme features and styling, you can reference the original [clean-jsdoc-theme demo](https://ankdev.me/clean-jsdoc-theme/v4).
 
 ## Screenshots
 
@@ -40,9 +50,9 @@
 In a terminal, type :
 
 ```bash
-npm install clean-jsdoc-theme --save-dev
+npm install @qubit-ltd/jsdoc-theme --save-dev
 # or
-yarn add clean-jsdoc-theme -D
+yarn add @qubit-ltd/jsdoc-theme -D
 ```
 
 In your projects `package.json` file, add a script to generate the documentation using JSDoc :
@@ -58,11 +68,11 @@ In your projects `package.json` file, add a script to generate the documentation
 > file,
 > replace `jsdoc.json` with its name.
 
-In your `jsdoc.json` file, add a template option to use `clean-jsdoc-theme` instead of the default JSDoc theme:
+In your `jsdoc.json` file, add a template option to use `qubit-jsdoc-theme` instead of the default JSDoc theme:
 
 ```json
 "opts": {
-  "template": "node_modules/clean-jsdoc-theme"
+  "template": "node_modules/@qubit-ltd/jsdoc-theme"
 }
 ```
 
@@ -72,8 +82,67 @@ Now, run the previously added script to generate the documentation :
 npm run generate-docs
 ```
 
-For more information, look at the [clean-jsdoc-theme-example](https://github.com/ankitskvmdam/clean-jsdoc-theme-example)
-repository.
+## Usage Example
+
+Here's how to document your JavaScript classes to take advantage of the enhanced features:
+
+```javascript
+/**
+ * Represents a user in the system.
+ * @class User
+ * @author John Doe
+ */
+class User {
+    /**
+     * User's unique identifier
+     * @type {string}
+     */
+    id;
+
+    /**
+     * User's display name
+     * @type {string}
+     */
+    name;
+
+    /**
+     * User's email address
+     * @type {string}
+     */
+    email;
+
+    /**
+     * Whether the user is active
+     * @type {boolean}
+     */
+    isActive;
+
+    /**
+     * Creates a new user instance
+     * @param {string} name - The user's name
+     * @param {string} email - The user's email
+     */
+    constructor(name, email) {
+        this.name = name;
+        this.email = email;
+        this.isActive = true;
+    }
+
+    /**
+     * Activates the user account
+     * @returns {boolean} True if activation was successful
+     */
+    activate() {
+        this.isActive = true;
+        return true;
+    }
+}
+```
+
+This will generate documentation with:
+- A dedicated "Properties" section showing all class properties in a table
+- A "Constructor" section (only if constructor has documentation)
+- A "Members" section for methods (properties are excluded to avoid duplication)
 
 ## Example JSDoc Config
 
@@ -91,7 +160,7 @@ repository.
         "destination": "docs/",
         "recurse": true,
         "verbose": true,
-        "template": "./node_modules/clean-jsdoc-theme",
+        "template": "./node_modules/@qubit-ltd/jsdoc-theme",
         "theme_opts": {
             "default_theme": "dark"
         }
@@ -583,42 +652,72 @@ Don't forget to add the following in your jsdoc config file, otherwise toc will 
 
 ## Changelog
 
-Changelog is moved
-to [https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/CHANGELOG.md](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/CHANGELOG.md)
+### v1.0.0 (2025-01-XX)
+
+**Initial Release - Based on clean-jsdoc-theme v4.3.0**
+
+#### 🆕 New Features
+- **Smart Properties Table**: Automatically generates a dedicated "Properties" section for classes
+- **Field-Level JSDoc Support**: Properties table populated from individual field `@type` annotations
+- **Intelligent Constructor Detection**: Only displays constructor section when explicitly documented
+- **Clean Member Organization**: Properties displayed separately from methods to avoid duplication
+- **English Comments**: All custom code uses English comments for better universality
+
+#### 🔧 Technical Changes
+- Custom template modifications in `container.tmpl` and `method.tmpl`
+- Enhanced property collection and rendering logic
+- Smart constructor detection algorithm
+- Template-only solution (no custom plugins required)
+
+#### 📦 Package Updates
+- Package name: `@qubit-ltd/jsdoc-theme`
+- Updated build pipeline for production deployment
+- Configured for Qubit private npm registry
+
+For the base theme changelog, see [clean-jsdoc-theme changelog](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/CHANGELOG.md).
 
 ## Developing
 
-Before starting please go through
-our [contributing guide](https://github.com/ankitskvmdam/clean-jsdoc-theme/blob/master/CONTRIBUTING.md).
-
 ```bash
-git clone https://github.com/ankitskvmdam/clean-jsdoc-theme.git
-cd clean-jsdoc-theme
+git clone https://github.com/Haixing-Hu/qubit-jsdoc-theme.git
+cd qubit-jsdoc-theme
 npm install
 npm install jsdoc --no-save
 npm run build
 ```
 
-`npm run build` will generate files in output folder.
+`npm run build` will generate minified CSS and JavaScript files for production use.
+
+To test your changes:
+```bash
+npm run build:demo
+```
+
+This will generate demo documentation in the `output` folder.
+
+## Contributing
+
+We welcome contributions! Please feel free to submit issues and pull requests on [GitHub](https://github.com/Haixing-Hu/qubit-jsdoc-theme).
+
+## Acknowledgments
+
+This project is based on the excellent [clean-jsdoc-theme](https://github.com/ankitskvmdam/clean-jsdoc-theme) by [Ankit Kumar](https://github.com/ankitskvmdam). We extend our gratitude to the original author and all contributors of the clean-jsdoc-theme project.
 
 ## Contributors
 
-<a href="https://github.com/ankitskvmdam/clean-jsdoc-theme/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ankitskvmdam/clean-jsdoc-theme" alt="clean-jsdoc-contributors" />
+<a href="https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Haixing-Hu/qubit-jsdoc-theme" alt="qubit-jsdoc-theme-contributors" />
 </a>
 
 ## Thanks
 
-Thanks to [fuse.js](https://fusejs.io/), [hljs](https://highlightjs.org/),[tippy.js](https://tippyjs.bootcss.com/), and
-all awesome contributors.
+Thanks to [fuse.js](https://fusejs.io/), [hljs](https://highlightjs.org/), [tippy.js](https://tippyjs.bootcss.com/), the original [clean-jsdoc-theme](https://github.com/ankitskvmdam/clean-jsdoc-theme) project, and all awesome contributors.
 
 ## Contact
 
-If you like my work, then give me
-a <a href="https://github.com/ankitskvmdam/clean-jsdoc-theme" data-icon="octicon-star" aria-label="Star ankitskvmdam/clean-jsdoc-theme on GitHub">
-star</a>.
+If you like this project, please give it a <a href="https://github.com/Haixing-Hu/qubit-jsdoc-theme" data-icon="octicon-star" aria-label="Star Haixing-Hu/qubit-jsdoc-theme on GitHub">star</a>.
 
-Mail me at: <a href="mailto:hello@ankdev.me">hello@ankdev.me</a> <br>
+Mail: <a href="mailto:starfish.hu@gmail.com">starfish.hu@gmail.com</a> <br>
 
 ## License
 
