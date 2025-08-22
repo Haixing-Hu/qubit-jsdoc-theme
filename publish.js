@@ -561,7 +561,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Classes]: buildSidebarMembers({
-      itemHeading: "Classes",
+      itemHeading: i18n.t("classes", "Classes"),
       items: members.classes,
       itemsSeen: seen,
       linktoFn: linkto,
@@ -617,7 +617,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Global]: buildSidebarMembers({
-      itemHeading: "Global",
+      itemHeading: i18n.t("global", "Global"),
       items: members.globals,
       itemsSeen: seenGlobal,
       linktoFn: linkto,
