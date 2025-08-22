@@ -59,14 +59,14 @@ var self = this;
 
 <?js if (data['this']) { ?>
     <div class="method-member-container mt-20">
-    <strong>This:</strong>
+    <strong><?js= t('this') ?>:</strong>
     <ul><li><?js= this.linkto(data['this'], data['this']) ?></li></ul>
     </div>
 <?js } ?>
 
 <?js if (data.params && params.length && !data.hideconstructor) { ?>
     <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Parameters:</strong>
+        <strong><?js= t('parameters') ?>:</strong>
         <?js= this.partial('params.tmpl', params) ?>
     </div>
 <?js } ?>
@@ -75,7 +75,7 @@ var self = this;
 
 <?js if (data.kind !== 'module' && data.requires && data.requires.length) { ?>
     <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Requires:</strong>
+        <strong><?js= t('requires') ?>:</strong>
         <ul>
             <?js data.requires.forEach(function(r) { ?>
                 <li><?js= self.linkto(r) ?></li>
@@ -86,7 +86,7 @@ var self = this;
 
 <?js if (data.fires && fires.length) { ?>
     <div class="method-member-container flex w-100 overflow-auto mt-20">
-        <strong>Fires:</strong>
+        <strong><?js= t('fires') ?>:</strong>
             <ul>
                 <?js fires.forEach(function(f) { ?>
                     <li><?js= self.linkto(f) ?></li>
@@ -97,7 +97,7 @@ var self = this;
 
 <?js if (data.listens && listens.length) { ?>
     <div class="method-member-container flex w-100 overflow-auto mt-20">
-        <strong>Listens to Events:</strong>
+        <strong><?js= t('listens_to_events') ?>:</strong>
         <ul>
             <?js listens.forEach(function(f) { ?>
                 <li><?js= self.linkto(f) ?></li>
@@ -108,7 +108,7 @@ var self = this;
 
 <?js if (data.listeners && listeners.length) { ?>
     <div class="method-member-container mt-20">
-    <strong>Listeners of This Event:</strong>
+    <strong><?js= t('listeners_of_this_event') ?>:</strong>
     <ul>
         <?js listeners.forEach(function(f) { ?>
             <li><?js= self.linkto(f) ?></li>
@@ -119,7 +119,7 @@ var self = this;
 
 <?js if (data.modifies && modifies.length) {?>
     <div class="method-member-container mt-20">
-    <strong>Modifies:</strong>
+    <strong><?js= t('modifies') ?>:</strong>
         <?js if (modifies.length > 1) { ?>
             <ul>
                 <?js modifies.forEach(function(r) { ?>
@@ -136,7 +136,7 @@ var self = this;
 
 <?js if (data.exceptions && exceptions.length) { ?>
     <div class="method-member-container mt-20">
-    <strong>Throws:</strong>
+    <strong><?js= t('throws') ?>:</strong>
     <?js if (exceptions.length > 1) { ?>
         <ul>
             <?js exceptions.forEach(function(r) { ?>
@@ -151,7 +151,7 @@ var self = this;
 
 <?js if (data.returns && returns.length) { ?>
     <div class="method-member-container mt-20">
-    <strong>Returns:</strong>
+    <strong><?js= t('returns') ?>:</strong>
         <?js if (returns.length > 1) { ?>
             <ul>
                 <?js returns.forEach(function(r) { ?>
@@ -167,7 +167,7 @@ var self = this;
 
 <?js if (data.yields && yields.length) { ?>
     <div class="method-member-container mt-20">
-    <strong>Yields:</strong>
+    <strong><?js= t('yields') ?>:</strong>
         <?js if (yields.length > 1) { ?>
             <ul>
                 <?js yields.forEach(function(r) { ?>
@@ -184,7 +184,7 @@ var self = this;
 
 <?js if (data.examples && examples.length) { ?>
     <div class="method-member-container flex flex-col w-100 overflow-auto mt-20">
-        <strong>Example<?js= examples.length > 1? 's':'' ?></strong>
+        <strong><?js= examples.length > 1 ? t('examples') : t('example') ?></strong>
         <?js= this.partial('examples.tmpl', examples) ?>
     </div>
 <?js } ?>
