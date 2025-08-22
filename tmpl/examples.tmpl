@@ -12,12 +12,12 @@
     <?js } ?>
     <div class="rel">
     <pre class="prettyprint"><code><?js= self.htmlsafe(example.code) ?></code></pre>
-    
-    <?js 
-        if(enable_for.findIndex(function (val) { return val === "examples"}) !== -1) { 
+
+    <?js
+        if(enable_for.findIndex(function (val) { return val === "examples"}) !== -1) {
             var options = codepen.options || {};
             var optionsString = '';
-            
+
             var code = `${options.js}
 ${example.code}
             `
@@ -36,8 +36,8 @@ ${example.code}
 
     ?>
         <form action="https://codepen.io/pen/define" method="POST" target="_blank" class="codepen-form">
-            <input type="hidden" name="data" value='{"title": "<?js= example.caption || 'Example' ?>", "js": <?js= jsonString ?>, <?js= optionsString ?> }' />
-            <button class="icon-button codepen-button" type="submit" value="Create New Pen with Prefilled Data" aria-label='open in codepen'>
+            <input type="hidden" name="data" value='{"title": "<?js= example.caption || t('example') ?>", "js": <?js= jsonString ?>, <?js= optionsString ?> }' />
+            <button class="icon-button codepen-button" type="submit" value="Create New Pen with Prefilled Data" aria-label='<?js= t('open_in_codepen') ?>'>
                 <svg><use xlink:href="#codepen-icon"></use></svg>
             </button>
         </form>
