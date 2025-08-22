@@ -230,6 +230,52 @@ dt {
 
 }
 
+/* Enhanced Author information styling */
+.details .tag-author {
+	font-style: normal;
+}
+
+/* Style the author container to look like inline text */
+.details dt.tag-author.bold {
+	display: inline;
+	font-weight: 600;
+	margin-right: 0.5rem;
+	min-width: auto;
+	float: none;
+	font-family: "heading", sans-serif;
+}
+
+.details dd.tag-author {
+	display: inline;
+	margin: 0;
+}
+
+.details dd.tag-author ul {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.details dd.tag-author ul li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+.details dd.tag-author ul li:not(:last-child):after {
+	content: ", ";
+}
+
+/* Remove background and padding from author details container */
+.details .details-item-container {
+	background: transparent;
+	border: none;
+	padding: 0.25rem 0;
+	margin: 0;
+}
+
 /* stylelint-disable */
 .details pre.prettyprint {
 	margin: 0;
