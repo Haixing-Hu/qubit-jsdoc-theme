@@ -231,67 +231,72 @@ dt {
 }
 
 /* Enhanced Author information styling */
+
 .details .tag-author {
 	font-style: normal;
 }
 
 /* Style the author container to look like inline text */
-.details dt.tag-author.bold {
+
+.details .tag-author.bold {
 	display: inline;
+	float: none;
+	font-family: "heading", sans-serif;
 	font-weight: 600;
 	margin-right: 0.5rem;
 	min-width: auto;
-	float: none;
-	font-family: "heading", sans-serif;
 }
 
-.details dd.tag-author {
+.details .tag-author {
 	display: inline;
 	margin: 0;
 }
 
-.details dd.tag-author ul {
+.details .tag-author ul {
 	display: inline;
-	margin: 0;
-	padding: 0;
 	list-style: none;
-}
-
-.details dd.tag-author ul li {
-	display: inline;
 	margin: 0;
 	padding: 0;
-	font-weight: normal;
 }
 
-.details dd.tag-author ul li:not(:last-child):after {
+.tag-author ul li {
+	display: inline;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
+.tag-author ul li:not(:last-child)::after {
 	content: ", ";
 }
 
 /* Remove background and padding from author details container */
+
 .details .details-item-container {
 	background: transparent !important;
-	border: none;
-	padding: 0.25rem 0;
+	border: 0;
 	margin: 0;
+	padding: 0.25rem 0;
 }
 
 /* Completely remove background from details container when it contains author */
+
 .details:has(.tag-author) {
 	background: transparent !important;
-	border: none !important;
+	border: 0 !important;
 	border-radius: 0 !important;
-	padding: 0 !important;
 	margin: 0 !important;
+	padding: 0 !important;
 }
 
 /* Fallback for browsers that don't support :has() */
+
 .container-overview .details {
 	background: transparent !important;
-	border: none !important;
+	border: 0 !important;
 	border-radius: 0 !important;
-	padding: 0 !important;
 	margin: 0 !important;
+	padding: 0 !important;
 }
 
 /* stylelint-disable */
