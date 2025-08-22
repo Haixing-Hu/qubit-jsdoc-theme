@@ -4,25 +4,25 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typeof tippy !== 'undefined') {
     // eslint-disable-next-line no-undef
     tippy(".home-button", {
-      content: "<?js= 'home_tooltip' ?>",
+      content: "<?js= t('home_tooltip') ?>",
       delay: 500,
     });
 
     // eslint-disable-next-line no-undef
     tippy(".theme-toggle", {
-      content: "<?js= 'toggle_theme_tooltip' ?>",
+      content: "<?js= t('toggle_theme_tooltip') ?>",
       delay: 500,
     });
 
     // eslint-disable-next-line no-undef
     tippy(".search-button", {
-      content: "<?js= 'search_tooltip' ?>",
+      content: "<?js= t('search_tooltip') ?>",
       delay: 500,
     });
 
     // eslint-disable-next-line no-undef
     tippy(".font-size", {
-      content: "<?js= 'font_size_tooltip' ?>",
+      content: "<?js= t('font_size_tooltip') ?>",
       delay: 500,
     });
   }
