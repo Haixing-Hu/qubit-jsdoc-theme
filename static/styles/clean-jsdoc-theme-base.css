@@ -270,10 +270,28 @@ dt {
 
 /* Remove background and padding from author details container */
 .details .details-item-container {
-	background: transparent;
+	background: transparent !important;
 	border: none;
 	padding: 0.25rem 0;
 	margin: 0;
+}
+
+/* Completely remove background from details container when it contains author */
+.details:has(.tag-author) {
+	background: transparent !important;
+	border: none !important;
+	border-radius: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Fallback for browsers that don't support :has() */
+.container-overview .details {
+	background: transparent !important;
+	border: none !important;
+	border-radius: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
 }
 
 /* stylelint-disable */
