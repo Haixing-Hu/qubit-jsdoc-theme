@@ -516,6 +516,12 @@ function fontSizeTooltip() {
 function initTooltip() {
     // add tooltip to navbar item
     // eslint-disable-next-line no-undef
+    tippy('.home-button', {
+        content: 'Go to Homepage',
+        delay: 500,
+    });
+
+    // eslint-disable-next-line no-undef
     tippy('.theme-toggle', {
         content: 'Toggle Theme',
         delay: 500,
@@ -655,14 +661,27 @@ function highlightActiveLinkInSidebar() {
     element.scrollIntoView();
 }
 
+function goToHomepage() {
+    // Navigate to the base URL (homepage)
+    // eslint-disable-next-line no-undef
+    window.location.href = baseURL + 'index.html';
+}
+
 function onDomContentLoaded() {
     var themeButton = document.querySelectorAll('.theme-toggle');
+    var homeButton = document.querySelectorAll('.home-button');
 
     initMobileMenu();
 
     if (themeButton) {
         themeButton.forEach(function (button) {
             button.addEventListener('click', toggleTheme);
+        });
+    }
+
+    if (homeButton) {
+        homeButton.forEach(function (button) {
+            button.addEventListener('click', goToHomepage);
         });
     }
 

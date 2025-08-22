@@ -1,6 +1,12 @@
 <?js 
     var data = this.navbar
-if(data.search) { ?>
+?>
+<div class="navbar-right-item">
+    <button class="icon-button home-button" aria-label='go-to-homepage'>
+        <svg><use xlink:href="#home-icon"></use></svg>
+    </button>
+</div>
+<?js if(data.search) { ?>
     <div class="navbar-right-item">
         <button class="icon-button search-button" aria-label='open-search'>
             <svg><use xlink:href="#search-icon"></use></svg>
