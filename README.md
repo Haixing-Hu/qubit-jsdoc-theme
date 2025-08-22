@@ -1,6 +1,6 @@
 # qubit-jsdoc-theme
 
-[![Stars](https://img.shields.io/github/stars/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-1.0.0-005bff) [![Issues Open](https://img.shields.io/github/issues/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/blob/master/LICENSE)
+[![Stars](https://img.shields.io/github/stars/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-1.2.0-005bff) [![Issues Open](https://img.shields.io/github/issues/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/blob/master/LICENSE)
 <br>
 
 **Based on [clean-jsdoc-theme](https://github.com/ankitskvmdam/clean-jsdoc-theme) v4.3.0**
@@ -13,6 +13,9 @@
 - **🆕 Intelligent Constructor Detection:** Only displays the "Constructor" section when a class has explicit constructor documentation, avoiding empty constructor sections for classes without custom constructors.
 - **🆕 Field-Level JSDoc Support:** Properties table is populated directly from `@type` annotations on individual class fields, eliminating the need for redundant `@property` tags in class-level JSDoc.
 - **🆕 Clean Member Organization:** Properties are displayed in their own dedicated section, while the "Members" section can be configured to show only methods, avoiding duplication.
+- **🆕 Internationalization (i18n):** Full support for multiple languages with comprehensive translation of all UI elements, section headings, table headers, and navigation tooltips.
+- **🆕 Homepage Navigation:** Added a "Back to Homepage" button in the top navigation bar for easy navigation between class documentation and the main documentation index.
+- **🆕 Enhanced Tooltips:** All navigation buttons include internationalized tooltips that adapt to the selected language.
 
 ## Key Features (Inherited from clean-jsdoc-theme)
 
@@ -162,7 +165,8 @@ This will generate documentation with:
         "verbose": true,
         "template": "./node_modules/@qubit-ltd/jsdoc-theme",
         "theme_opts": {
-            "default_theme": "dark"
+            "default_theme": "dark",
+            "language": "en"
         }
     },
     "markdown": {
@@ -197,17 +201,45 @@ To set the documentation language, add the following in your JSDoc config file:
 }
 ```
 
-Supported languages:
+**Supported languages:**
 - `"en"` - English (default)
 - `"zh"` - Chinese (中文)
 
-The language setting affects:
+**The language setting affects:**
 - Section headings (Properties, Methods, Constructor, etc.)
 - Table headers (Name, Type, Description, etc.)
-- Button tooltips and aria-labels
-- Parameter attributes (optional, nullable, repeatable)
+- Navigation button tooltips (Back to Homepage, Toggle Theme, Search, Change Font Size)
+- Parameter attributes (optional, nullable, repeatable, Properties)
+- Method documentation labels (Parameters, Returns, Type, Fires, Throws, etc.)
+- Detail information labels (Author, Version, Since, Inherited From, etc.)
 
 If no language is specified, English will be used as the default.
+
+**Adding new languages:**
+
+To add support for a new language, you need to:
+
+1. Create a new translation file in the `i18n/` directory (e.g., `i18n/fr.json` for French)
+2. Copy the structure from `i18n/en.json` and translate all values
+3. The translation file should include all keys with their translated values:
+
+```json
+{
+  "properties": "Propriétés",
+  "methods": "Méthodes",
+  "constructor": "Constructeur",
+  "name": "Nom",
+  "type": "Type",
+  "description": "Description",
+  "home_tooltip": "Retour à l'accueil",
+  "toggle_theme_tooltip": "Basculer le thème",
+  "search_tooltip": "Rechercher",
+  "font_size_tooltip": "Changer la taille de police",
+  // ... add all other keys from en.json
+}
+```
+
+4. The i18n system will automatically load the appropriate language file based on the `language` setting in your JSDoc configuration.
 
 ### Set base url
 
@@ -640,6 +672,7 @@ This will remove all symbols (members, methods ...) that come from inherited par
 | name                         | default                                                                                                      | use case                                                                   | expected value(s)                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `default_theme`              | `"dark"`                                                                                                     | To set the default theme                                                   | `"light", "dark"`, `"fallback-light"` or `"fallback-dark"` |
+| `language`                   | `"en"`                                                                                                       | To set the documentation language (i18n)                                   | `"en"` (English) or `"zh"` (Chinese)                       |
 | `homepageTitle`              | "Home"                                                                                                       | To set the title of homepage. This will update HTML `<title>`.             | `string`                                                   |
 | `title`                      | `null`                                                                                                       | To set the title of the sidebar.                                                           | `HTML` or `string`                                         |
 | `base_url`                   | `/`                                                                                                          | To set the base URL                                                        | `string`                                                   |
@@ -671,6 +704,27 @@ Don't forget to add the following in your jsdoc config file, otherwise toc will 
 ```
 
 ## Changelog
+
+### v1.2.0 (2025-01-XX)
+
+**Major Update - Internationalization & Navigation Enhancements**
+
+#### 🌍 New Features
+- **Full Internationalization (i18n)**: Complete support for multiple languages with comprehensive translation system
+- **Homepage Navigation Button**: Added "Back to Homepage" button in top navigation bar for easy navigation
+- **Internationalized Tooltips**: All navigation buttons now include language-aware tooltips
+- **Enhanced Language Support**: Built-in support for English and Chinese with easy extensibility for additional languages
+
+#### 🔧 Technical Improvements
+- **i18n System Architecture**: Implemented robust internationalization system with helper functions and language files
+- **Template Enhancements**: Updated all template files to support dynamic language switching
+- **Smart Language Detection**: Automatic language file loading based on JSDoc configuration
+- **Tooltip Integration**: Enhanced tooltip system with i18n support using tippy.js
+
+#### 📝 Documentation Updates
+- **Comprehensive i18n Guide**: Detailed instructions for configuring languages and adding new translations
+- **Usage Examples**: Updated examples to show i18n configuration
+- **Developer Guide**: Instructions for extending language support
 
 ### v1.0.0 (2025-01-XX)
 
