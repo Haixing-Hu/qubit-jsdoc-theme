@@ -68,5 +68,9 @@
   "toggle_theme_tooltip": "Toggle Theme",
   "search_tooltip": "Search",
   "font_size_tooltip": "Change font size",
-  "home_tooltip": "Go to Homepage"
+  "home_tooltip": "Go to Homepage",
+  "on_this_page": "On this page",
+  "search_placeholder": "Search...",
+  "search_hint": "Type anything to view search result",
+  "open_in_codepen": "Open in CodePen"
 }
