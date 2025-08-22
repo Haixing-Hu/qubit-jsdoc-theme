@@ -647,11 +647,8 @@ function buildSidebar(members) {
  */
 exports.publish = async function (taffyData, opts, tutorials) {
   // Initialize i18n system
-  console.log('[i18n] Full opts object:', JSON.stringify(opts, null, 2));
   const language = (opts && opts.theme_opts && opts.theme_opts.language) || 'en';
-  console.log('[i18n] Initializing with language:', language);
   i18n.init({ language });
-  console.log('[i18n] Test translation for "properties":', i18n.t('properties'));
 
   let classes;
   let conf;
