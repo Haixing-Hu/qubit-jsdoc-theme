@@ -647,7 +647,8 @@ function buildSidebar(members) {
  */
 exports.publish = async function (taffyData, opts, tutorials) {
   // Initialize i18n system
-  const language = (opts && opts.theme_opts && opts.theme_opts.language) || 'en';
+  const language =
+    (opts && opts.theme_opts && opts.theme_opts.language) || "en";
   i18n.init({ language });
 
   let classes;

@@ -2,10 +2,10 @@
  * Internationalization helper for JSDoc templates
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-let currentLanguage = 'en';
+let currentLanguage = "en";
 let translations = {};
 
 /**
@@ -13,19 +13,27 @@ let translations = {};
  * @param {string} language - Language code (en, zh)
  */
 function loadTranslations(language) {
-    const translationPath = path.join(__dirname, '..', 'i18n', `${language}.json`);
+  const translationPath = path.join(
+    __dirname,
+    "..",
+    "i18n",
+    `${language}.json`
+  );
 
-    try {
-        if (fs.existsSync(translationPath)) {
-            const content = fs.readFileSync(translationPath, 'utf8');
-            translations[language] = JSON.parse(content);
-            return true;
-        }
-    } catch (error) {
-        console.warn(`Failed to load translations for language: ${language}`, error.message);
+  try {
+    if (fs.existsSync(translationPath)) {
+      const content = fs.readFileSync(translationPath, "utf8");
+      translations[language] = JSON.parse(content);
+      return true;
     }
+  } catch (error) {
+    console.warn(
+      `Failed to load translations for language: ${language}`,
+      error.message
+    );
+  }
 
-    return false;
+  return false;
 }
 
 /**
@@ -33,12 +41,12 @@ function loadTranslations(language) {
  * @param {string} language - Language code
  */
 function setLanguage(language) {
-    currentLanguage = language;
+  currentLanguage = language;
 
-    // Load translations if not already loaded
-    if (!translations[language]) {
-        loadTranslations(language);
-    }
+  // Load translations if not already loaded
+  if (!translations[language]) {
+    loadTranslations(language);
+  }
 }
 
 /**
@@ -48,19 +56,19 @@ function setLanguage(language) {
  * @returns {string} Translated text
  */
 function t(key, fallback) {
-    const langTranslations = translations[currentLanguage];
+  const langTranslations = translations[currentLanguage];
 
-    if (langTranslations && langTranslations[key]) {
-        return langTranslations[key];
-    }
+  if (langTranslations && langTranslations[key]) {
+    return langTranslations[key];
+  }
 
-    // Try English as fallback
-    if (currentLanguage !== 'en' && translations['en'] && translations['en'][key]) {
-        return translations['en'][key];
-    }
+  // Try English as fallback
+  if (currentLanguage !== "en" && translations.en && translations.en[key]) {
+    return translations.en[key];
+  }
 
-    // Return fallback or key itself
-    return fallback || key;
+  // Return fallback or key itself
+  return fallback || key;
 }
 
 /**
@@ -68,7 +76,7 @@ function t(key, fallback) {
  * @returns {string} Current language code
  */
 function getCurrentLanguage() {
-    return currentLanguage;
+  return currentLanguage;
 }
 
 /**
@@ -77,22 +85,22 @@ function getCurrentLanguage() {
  * @param {string} [options.language='en'] - Default language
  */
 function init(options = {}) {
-    const language = options.language || 'en';
+  const language = options.language || "en";
 
-    // Load English translations (always available as fallback)
-    loadTranslations('en');
+  // Load English translations (always available as fallback)
+  loadTranslations("en");
 
-    // Load requested language if different
-    if (language !== 'en') {
-        loadTranslations(language);
-    }
+  // Load requested language if different
+  if (language !== "en") {
+    loadTranslations(language);
+  }
 
-    setLanguage(language);
+  setLanguage(language);
 }
 
 module.exports = {
-    init,
-    setLanguage,
-    getCurrentLanguage,
-    t
+  init,
+  setLanguage,
+  getCurrentLanguage,
+  t,
 };
