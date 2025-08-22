@@ -315,7 +315,7 @@ function prefixModuleToItemAnchor(item) {
   return prettyAnchor || anchor;
 }
 
-async function generate(title, docs, filename, resolveLinks) {
+async function generate(title, docs, filename, resolveLinks, packageInfo) {
   let docData;
   let html;
   let outpath;
@@ -342,7 +342,7 @@ async function generate(title, docs, filename, resolveLinks) {
   fs.writeFileSync(outpath, minifiedHtml, "utf8");
 }
 
-function generateSourceFiles(sourceFiles, encoding = "utf8") {
+function generateSourceFiles(sourceFiles, packageInfo, encoding = "utf8") {
   Object.keys(sourceFiles).forEach(function (file) {
     let source;
     // links are keyed to the shortened path in each doclet's `meta.shortpath` property
@@ -370,7 +370,8 @@ function generateSourceFiles(sourceFiles, encoding = "utf8") {
       `Source: ${sourceFiles[file].shortened}`,
       [source],
       sourceOutFile,
-      false
+      false,
+      packageInfo
     );
   });
 }
@@ -916,11 +917,11 @@ exports.publish = async function (taffyData, opts, tutorials) {
 
   // generate the pretty-printed source files first so other pages can link to them
   if (outputSourceFiles) {
-    generateSourceFiles(sourceFiles, opts.encoding);
+    generateSourceFiles(sourceFiles, packageInfo, opts.encoding);
   }
 
   if (members.globals.length) {
-    await generate("Global", [{ kind: "globalobj" }], globalUrl);
+    await generate("Global", [{ kind: "globalobj" }], globalUrl, true, packageInfo);
   }
 
   // index page displays information from package.json and lists files
@@ -942,7 +943,9 @@ exports.publish = async function (taffyData, opts, tutorials) {
         },
       ])
       .concat(includeFilesListInHomepage ? files : []),
-    indexUrl
+    indexUrl,
+    true,
+    packageInfo
   );
 
   // set up the lists that we'll use to generate pages
@@ -965,7 +968,9 @@ exports.publish = async function (taffyData, opts, tutorials) {
       await generate(
         `Module: ${myModules[0].name}`,
         myModules,
-        helper.longnameToUrl[longname]
+        helper.longnameToUrl[longname],
+        true,
+        packageInfo
       );
     }
 
@@ -973,7 +978,9 @@ exports.publish = async function (taffyData, opts, tutorials) {
       await generate(
         `Class: ${myClasses[0].name}`,
         myClasses,
-        helper.longnameToUrl[longname]
+        helper.longnameToUrl[longname],
+        true,
+        packageInfo
       );
     }
 
@@ -981,7 +988,9 @@ exports.publish = async function (taffyData, opts, tutorials) {
       await generate(
         `Namespace: ${myNamespaces[0].name}`,
         myNamespaces,
-        helper.longnameToUrl[longname]
+        helper.longnameToUrl[longname],
+        true,
+        packageInfo
       );
     }
 
@@ -989,7 +998,9 @@ exports.publish = async function (taffyData, opts, tutorials) {
       await generate(
         `Mixin: ${myMixins[0].name}`,
         myMixins,
-        helper.longnameToUrl[longname]
+        helper.longnameToUrl[longname],
+        true,
+        packageInfo
       );
     }
 
@@ -997,7 +1008,9 @@ exports.publish = async function (taffyData, opts, tutorials) {
       await generate(
         `External: ${myExternals[0].name}`,
         myExternals,
-        helper.longnameToUrl[longname]
+        helper.longnameToUrl[longname],
+        true,
+        packageInfo
       );
     }
 
@@ -1005,7 +1018,9 @@ exports.publish = async function (taffyData, opts, tutorials) {
       await generate(
         `Interface: ${myInterfaces[0].name}`,
         myInterfaces,
-        helper.longnameToUrl[longname]
+        helper.longnameToUrl[longname],
+        true,
+        packageInfo
       );
     }
   });
