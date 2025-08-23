@@ -1,3 +1,5 @@
+console.log("🔥🔥🔥 PUBLISH.JS IS BEING CALLED! 🔥🔥🔥");
+
 const _ = require("lodash");
 const env = require("jsdoc/env");
 const fs = require("fs-extra");
@@ -331,6 +333,12 @@ async function generate(title, docs, filename, resolveLinks, packageInfo) {
   };
 
   outpath = path.join(outdir, filename);
+  console.log("🚀🚀🚀 ABOUT TO RENDER CONTAINER.TMPL for:", filename, "🚀🚀🚀");
+  console.log(
+    "🔍 docData.docs[0].kind:",
+    docData.docs && docData.docs[0] ? docData.docs[0].kind : "NO DOCS"
+  );
+  console.log("🔍 packageInfo:", JSON.stringify(docData.packageInfo));
   html = view.render("container.tmpl", docData);
 
   if (resolveLinks !== false) {
@@ -921,7 +929,13 @@ exports.publish = async function (taffyData, opts, tutorials) {
   }
 
   if (members.globals.length) {
-    await generate("Global", [{ kind: "globalobj" }], globalUrl, true, packageInfo);
+    await generate(
+      "Global",
+      [{ kind: "globalobj" }],
+      globalUrl,
+      true,
+      packageInfo
+    );
   }
 
   // index page displays information from package.json and lists files
@@ -931,6 +945,11 @@ exports.publish = async function (taffyData, opts, tutorials) {
   const homepageTitle = themeOpts.homepageTitle || "Home";
   const includeFilesListInHomepage =
     themeOpts.includeFilesListInHomepage || false;
+
+  console.log("🏠🏠🏠 GENERATING INDEX PAGE 🏠🏠🏠");
+  console.log("🏠 indexUrl:", indexUrl);
+  console.log("🏠 packages:", packages.length);
+  console.log("🏠 packageInfo for index:", JSON.stringify(packageInfo));
 
   await generate(
     homepageTitle,

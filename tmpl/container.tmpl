@@ -10,6 +10,11 @@
         isGlobalPage = (doc.kind === 'globalobj');
     }
 ?>
+<div style="background: yellow; padding: 10px; margin: 10px; border: 1px solid red;">
+    DEBUG: doc.kind = <?js= doc.kind ?><br>
+    DEBUG: packageInfo = <?js= JSON.stringify(packageInfo) ?><br>
+    DEBUG: typeof packageInfo = <?js= typeof packageInfo ?>
+</div>
 <?js if (doc.kind === 'mainpage' || (doc.kind === 'package')) { ?>
     <?js if (packageInfo && packageInfo.version) { ?>
         <div class="package-version-info">
