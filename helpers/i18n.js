@@ -32,7 +32,6 @@ function loadTranslations(language) {
       error.message
     );
   }
-
   return false;
 }
 

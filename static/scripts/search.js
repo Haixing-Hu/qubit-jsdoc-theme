@@ -187,7 +187,6 @@ async function search(event) {
 
   if (!resultBox) {
     console.error("Search result container not found");
-
     return;
   }
 
@@ -206,7 +205,6 @@ async function search(event) {
     } catch (e) {
       console.log(e);
       showResultText("Failed to load result.");
-
       return;
     }
   }

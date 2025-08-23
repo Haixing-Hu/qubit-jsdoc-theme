@@ -625,7 +625,6 @@ function highlightActiveLinkInSidebar() {
       );
     } catch (e) {
       console.error(e);
-
       return;
     }
   }
