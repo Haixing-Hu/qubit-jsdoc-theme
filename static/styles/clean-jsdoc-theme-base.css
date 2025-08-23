@@ -242,7 +242,7 @@ dt {
 .module-version {
 	color: var(--text-color-secondary);
 	font-size: 0.875rem;
-	margin: 0.5rem 0 1rem 0;
+	margin: 0.5rem 0 1rem;
 }
 
 .package-version,
