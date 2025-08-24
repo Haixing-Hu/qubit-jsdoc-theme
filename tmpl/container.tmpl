@@ -199,6 +199,24 @@
 
     <?js
         var methods = self.find({kind: 'function', memberof: isGlobalPage ? {isUndefined: true} : doc.longname, ...shouldExcludeInherited});
+
+        // Add mixin methods if this class has @mixes tags
+        if (doc.mixes && doc.mixes.length) {
+            doc.mixes.forEach(function(mixinName) {
+                var mixinMethods = self.find({kind: 'function', memberof: mixinName});
+                if (mixinMethods && mixinMethods.length) {
+                    // Add inherited flag and source info to mixin methods
+                    mixinMethods.forEach(function(mixinMethod) {
+                        mixinMethod.inherited = true;
+                        mixinMethod.inherits = mixinName;
+                        mixinMethod.mixinSource = mixinName;
+                    });
+                    // Merge mixin methods with current class methods
+                    methods = methods.concat(mixinMethods);
+                }
+            });
+        }
+
         if (methods && methods.length && methods.forEach) {
     ?>
         <h2 id="methods" class="subsection-title has-anchor"><?js= t('methods') ?></h2>
