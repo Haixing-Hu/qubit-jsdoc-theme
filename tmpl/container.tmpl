@@ -152,18 +152,103 @@
         }
 
         if (allMembers && allMembers.length && allMembers.forEach) {
-            // Create a temporary properties array
-            var propertiesData = {
-                properties: allMembers.map(function(member) {
-                    return {
-                        name: member.name,
+            // Separate static and instance properties, merge getter/setter pairs
+            var staticProperties = {};
+            var instanceProperties = {};
+
+                                                                        allMembers.forEach(function(member) {
+                // Use JSDoc's built-in scope detection with fallback logic
+                // JSDoc sometimes misidentifies scope in mixin classes, so we add some heuristics
+                var isStatic = member.scope === 'static';
+
+                // Fallback: check longname pattern for static members (uses '.' separator)
+                // and instance members (uses '#' separator)
+                if (member.longname) {
+                    var hasStaticSeparator = member.longname.indexOf('.') > member.longname.lastIndexOf('#');
+                    var hasInstanceSeparator = member.longname.indexOf('#') > member.longname.lastIndexOf('.');
+
+                    if (hasStaticSeparator && !hasInstanceSeparator) {
+                        isStatic = true;
+                    } else if (hasInstanceSeparator && !hasStaticSeparator) {
+                        isStatic = false;
+                    }
+                }
+
+                var targetObj = isStatic ? staticProperties : instanceProperties;
+                var propName = member.name;
+
+                if (!targetObj[propName]) {
+                    targetObj[propName] = {
+                        name: propName,
                         type: member.type,
                         description: member.description || '',
                         nullable: member.nullable,
                         optional: member.optional,
-                        defaultvalue: member.defaultvalue
+                        defaultvalue: member.defaultvalue,
+                        isStatic: isStatic,
+                        hasGetter: false,
+                        hasSetter: false,
+                        getterDescription: '',
+                        setterDescription: ''
                     };
-                })
+                }
+
+                // Check if this is a getter or setter based on description or other indicators
+                var desc = (member.description || '').toLowerCase();
+                if (desc.indexOf('获取') === 0 || desc.indexOf('get') === 0) {
+                    targetObj[propName].hasGetter = true;
+                    targetObj[propName].getterDescription = member.description || '';
+                } else if (desc.indexOf('设置') === 0 || desc.indexOf('set') === 0) {
+                    targetObj[propName].hasSetter = true;
+                    targetObj[propName].setterDescription = member.description || '';
+                } else {
+                    // Regular property, use the description as is
+                    if (!targetObj[propName].description) {
+                        targetObj[propName].description = member.description || '';
+                    }
+                }
+            });
+
+            // Convert objects to arrays
+            var staticPropsArray = Object.keys(staticProperties).map(function(key) {
+                var prop = staticProperties[key];
+                // Combine getter/setter descriptions
+                if (prop.hasGetter && prop.hasSetter) {
+                    prop.description = prop.getterDescription + ' / ' + prop.setterDescription;
+                    prop.accessType = 'getter/setter';
+                } else if (prop.hasGetter) {
+                    prop.description = prop.getterDescription;
+                    prop.accessType = 'getter';
+                } else if (prop.hasSetter) {
+                    prop.description = prop.setterDescription;
+                    prop.accessType = 'setter';
+                } else {
+                    prop.accessType = 'property';
+                }
+                return prop;
+            });
+
+            var instancePropsArray = Object.keys(instanceProperties).map(function(key) {
+                var prop = instanceProperties[key];
+                if (prop.hasGetter && prop.hasSetter) {
+                    prop.description = prop.getterDescription + ' / ' + prop.setterDescription;
+                    prop.accessType = 'getter/setter';
+                } else if (prop.hasGetter) {
+                    prop.description = prop.getterDescription;
+                    prop.accessType = 'getter';
+                } else if (prop.hasSetter) {
+                    prop.description = prop.setterDescription;
+                    prop.accessType = 'setter';
+                } else {
+                    prop.accessType = 'property';
+                }
+                return prop;
+            });
+
+            // Create properties data with both static and instance properties
+            var propertiesData = {
+                staticProperties: staticPropsArray,
+                instanceProperties: instancePropsArray
             };
     ?>
         <h2 id="properties" class="subsection-title has-anchor"><?js= t('properties') ?></h2>
