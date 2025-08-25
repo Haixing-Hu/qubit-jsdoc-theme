@@ -555,7 +555,7 @@ function buildSidebar(members) {
 
   const sections = {
     [SECTION_TYPE.Modules]: buildSidebarMembers({
-      itemHeading: "Modules",
+      itemHeading: i18n.t("module", "Modules"),
       items: members.modules,
       itemsSeen: seen,
       linktoFn: linkto,
@@ -571,7 +571,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Externals]: buildSidebarMembers({
-      itemHeading: "Externals",
+      itemHeading: i18n.t("externals", "Externals"),
       items: members.externals,
       itemsSeen: seen,
       linktoFn: linktoExternal,
@@ -579,7 +579,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Events]: buildSidebarMembers({
-      itemHeading: "Events",
+      itemHeading: i18n.t("events", "Events"),
       items: members.events,
       itemsSeen: seen,
       linktoFn: linkto,
@@ -587,7 +587,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Namespaces]: buildSidebarMembers({
-      itemHeading: "Namespaces",
+      itemHeading: i18n.t("namespaces", "Namespaces"),
       items: members.namespaces,
       itemsSeen: seen,
       linktoFn: linkto,
@@ -595,7 +595,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Mixins]: buildSidebarMembers({
-      itemHeading: "Mixins",
+      itemHeading: i18n.t("mixins", "Mixins"),
       items: members.mixins,
       itemsSeen: seen,
       linktoFn: linkto,
@@ -603,7 +603,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Tutorials]: buildSidebarMembers({
-      itemHeading: "Tutorials",
+      itemHeading: i18n.t("tutorials", "Tutorials"),
       items: members.tutorials,
       itemsSeen: seenTutorials,
       linktoFn: linktoTutorial,
@@ -611,7 +611,7 @@ function buildSidebar(members) {
     }),
 
     [SECTION_TYPE.Interfaces]: buildSidebarMembers({
-      itemHeading: "Interfaces",
+      itemHeading: i18n.t("interfaces", "Interfaces"),
       items: members.interfaces,
       itemsSeen: seen,
       linktoFn: linkto,

@@ -36,6 +36,7 @@
   "requires": "依赖",
   "interfaces": "接口",
   "mixins": "混入",
+  "externals": "外部",
   "type_definitions": "类型定义",
   "optional": "可选",
   "nullable": "可为空",
