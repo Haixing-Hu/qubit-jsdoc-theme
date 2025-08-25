@@ -1,6 +1,6 @@
 # qubit-jsdoc-theme
 
-[![Stars](https://img.shields.io/github/stars/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-1.4.0-005bff) [![Issues Open](https://img.shields.io/github/issues/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/blob/master/LICENSE)
+[![Stars](https://img.shields.io/github/stars/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-1.5.0-005bff) [![Issues Open](https://img.shields.io/github/issues/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/blob/master/LICENSE)
 <br>
 
 **Based on [clean-jsdoc-theme](https://github.com/ankitskvmdam/clean-jsdoc-theme) v4.3.0**
@@ -10,6 +10,8 @@
 ## Enhanced Features (New in qubit-jsdoc-theme)
 
 - **🆕 Smart Properties Table:** Automatically generates a dedicated "Properties" section for classes, displaying all class properties in a clean table format with type information and descriptions derived from individual field JSDoc comments.
+- **🆕 Static/Instance Property Separation:** Intelligently separates static and instance properties into distinct sections, with automatic scope detection and fallback logic for accurate classification.
+- **🆕 Getter/Setter Pair Merging:** Automatically detects and merges getter/setter pairs into single table entries, displaying combined descriptions and access type indicators.
 - **🆕 Intelligent Constructor Detection:** Only displays the "Constructor" section when a class has explicit constructor documentation, avoiding empty constructor sections for classes without custom constructors.
 - **🆕 Field-Level JSDoc Support:** Properties table is populated directly from `@type` annotations on individual class fields, eliminating the need for redundant `@property` tags in class-level JSDoc.
 - **🆕 Clean Member Organization:** Properties are displayed in their own dedicated section, while the "Members" section can be configured to show only methods, avoiding duplication.
@@ -33,8 +35,10 @@
 The enhanced features of `qubit-jsdoc-theme` include:
 
 1. **Smart Properties Table**: Automatically generated from field-level `@type` annotations
-2. **Intelligent Constructor Detection**: Only shows constructor section when explicitly documented
-3. **Clean Organization**: Properties and methods are clearly separated
+2. **Static/Instance Property Separation**: Properties are automatically categorized and displayed in separate sections
+3. **Getter/Setter Pair Merging**: Related accessor methods are intelligently combined in the properties table
+4. **Intelligent Constructor Detection**: Only shows constructor section when explicitly documented
+5. **Clean Organization**: Properties and methods are clearly separated with enhanced categorization
 
 For the base theme features and styling, you can reference the original [clean-jsdoc-theme demo](https://ankdev.me/clean-jsdoc-theme/v4).
 
@@ -98,6 +102,13 @@ Here's how to document your JavaScript classes to take advantage of the enhanced
  */
 class User {
     /**
+     * Total number of users created
+     * @type {number}
+     * @static
+     */
+    static userCount = 0;
+
+    /**
      * User's unique identifier
      * @type {string}
      */
@@ -122,6 +133,24 @@ class User {
     isActive;
 
     /**
+     * Get user's full display information
+     * @type {string}
+     */
+    get displayInfo() {
+        return `${this.name} (${this.email})`;
+    }
+
+    /**
+     * Set user's full display information
+     * @type {string}
+     */
+    set displayInfo(value) {
+        const parts = value.split(' (');
+        this.name = parts[0];
+        this.email = parts[1]?.replace(')', '') || '';
+    }
+
+    /**
      * Creates a new user instance
      * @param {string} name - The user's name
      * @param {string} email - The user's email
@@ -130,6 +159,7 @@ class User {
         this.name = name;
         this.email = email;
         this.isActive = true;
+        User.userCount++;
     }
 
     /**
@@ -144,9 +174,10 @@ class User {
 ```
 
 This will generate documentation with:
-- A dedicated "Properties" section showing all class properties in a table
-- A "Constructor" section (only if constructor has documentation)
-- A "Members" section for methods (properties are excluded to avoid duplication)
+- **Static Properties section**: Showing `userCount` and other static properties
+- **Instance Properties section**: Showing `id`, `name`, `email`, `isActive` and merged `displayInfo` (getter/setter)
+- **Constructor section**: Only displayed when constructor has documentation
+- **Members section**: For methods like `activate()` (properties are excluded to avoid duplication)
 
 ## Example JSDoc Config
 
@@ -705,6 +736,26 @@ Don't forget to add the following in your jsdoc config file, otherwise toc will 
 ```
 
 ## Changelog
+
+### v1.5.0 (2025-01-XX)
+
+**Advanced Property Management & Enhanced Documentation Features**
+
+#### 🔧 New Features
+- **Static/Instance Property Separation**: Automatically separates static and instance properties into distinct sections with intelligent scope detection
+- **Getter/Setter Pair Merging**: Smart detection and merging of getter/setter pairs into unified table entries with combined descriptions
+- **Enhanced Scope Detection**: Improved logic for detecting property scope using JSDoc's built-in detection with fallback heuristics
+- **Access Type Indicators**: Clear visual indicators for property access types (property, getter, setter, getter/setter)
+
+#### 🛠️ Technical Improvements
+- **Advanced Template Logic**: Enhanced `container.tmpl` with sophisticated property categorization and merging algorithms
+- **Improved Properties Template**: Updated `properties.tmpl` to support separate rendering of static and instance properties
+- **Fallback Scope Detection**: Added longname pattern analysis for accurate scope detection when JSDoc's built-in detection fails
+- **Bilingual Section Headers**: Support for both English and Chinese section headers in property tables
+
+#### 📖 Documentation Updates
+- **Enhanced Usage Examples**: Updated examples to demonstrate static properties and getter/setter documentation
+- **Feature Documentation**: Comprehensive documentation for new property management features
 
 ### v1.4.0 (2025-01-XX)
 
