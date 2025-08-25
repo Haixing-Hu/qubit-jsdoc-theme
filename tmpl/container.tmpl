@@ -11,11 +11,6 @@
     }
 ?>
 <?js if (doc.kind === 'mainpage' || (doc.kind === 'package')) { ?>
-    <?js if (packageInfo && packageInfo.version) { ?>
-        <div class="package-version-info">
-            <p class="package-version"><?js= t('version') ?>: v<?js= packageInfo.version ?></p>
-        </div>
-    <?js } ?>
     <?js= self.partial('mainpage.tmpl', doc) ?>
 <?js } else if (doc.kind === 'source') { ?>
     <?js= self.partial('source.tmpl', doc) ?>
@@ -46,9 +41,6 @@
                 <h1 id="<?js= module.name ?>-title" class="has-anchor">
                     <?js= module.name ?>
                 </h1>
-                <?js if (module.version) { ?>
-                    <p class="module-version"><?js= t('version') ?>: v<?js= module.version ?></p>
-                <?js } ?>
             <?js } ?>
             <?js if (module.classdesc) { ?>
                 <div class="class-description"><?js= module.classdesc ?></div>
@@ -207,6 +199,24 @@
 
     <?js
         var methods = self.find({kind: 'function', memberof: isGlobalPage ? {isUndefined: true} : doc.longname, ...shouldExcludeInherited});
+
+        // Add mixin methods if this class has @mixes tags
+        if (doc.mixes && doc.mixes.length) {
+            doc.mixes.forEach(function(mixinName) {
+                var mixinMethods = self.find({kind: 'function', memberof: mixinName});
+                if (mixinMethods && mixinMethods.length) {
+                    // Add inherited flag and source info to mixin methods
+                    mixinMethods.forEach(function(mixinMethod) {
+                        mixinMethod.inherited = true;
+                        mixinMethod.inherits = mixinName;
+                        mixinMethod.mixinSource = mixinName;
+                    });
+                    // Merge mixin methods with current class methods
+                    methods = methods.concat(mixinMethods);
+                }
+            });
+        }
+
         if (methods && methods.length && methods.forEach) {
     ?>
         <h2 id="methods" class="subsection-title has-anchor"><?js= t('methods') ?></h2>

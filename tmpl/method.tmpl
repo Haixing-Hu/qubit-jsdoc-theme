@@ -7,13 +7,19 @@ var self = this;
     // Check if this is a class with an explicit constructor
     var hasExplicitConstructor = false;
     if (data.kind === 'class') {
-        // Only consider constructor-specific documentation, not class-level documentation
-        hasExplicitConstructor = data.params && data.params.length > 0 ||
-                               (data.description && data.description !== data.classdesc) ||
-                               data.examples && data.examples.length > 0 ||
-                               data.see && data.see.length > 0 ||
-                               data.since;
-        // Note: We exclude @author as it's typically class-level, not constructor-specific
+        // Only show constructor if:
+        // 1. Has constructor parameters OR
+        // 2. Has constructor-specific description (different from class description) OR
+        // 3. Has constructor-specific examples/see/since AND also has params or different description
+
+        var hasConstructorParams = data.params && data.params.length > 0;
+        var hasConstructorSpecificDescription = data.description &&
+                                              data.description !== data.classdesc &&
+                                              data.description.trim() !== '';
+
+        // For MixIn classes and similar patterns, avoid showing constructor
+        // unless there are clear constructor-specific elements
+        hasExplicitConstructor = hasConstructorParams || hasConstructorSpecificDescription;
     }
 ?>
 <?js if (data.kind !== 'module' && !data.hideconstructor) { ?>
