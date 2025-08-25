@@ -1,6 +1,6 @@
 # qubit-jsdoc-theme
 
-[![Stars](https://img.shields.io/github/stars/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-1.2.0-005bff) [![Issues Open](https://img.shields.io/github/issues/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/blob/master/LICENSE)
+[![Stars](https://img.shields.io/github/stars/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme) [![Fork](https://img.shields.io/github/forks/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/fork) ![Version](https://img.shields.io/badge/version-1.4.0-005bff) [![Issues Open](https://img.shields.io/github/issues/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/issues) [![Contributors](https://img.shields.io/github/contributors/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/graphs/contributors) [![license](https://img.shields.io/github/license/Haixing-Hu/qubit-jsdoc-theme)](https://github.com/Haixing-Hu/qubit-jsdoc-theme/blob/master/LICENSE)
 <br>
 
 **Based on [clean-jsdoc-theme](https://github.com/ankitskvmdam/clean-jsdoc-theme) v4.3.0**
@@ -13,6 +13,7 @@
 - **🆕 Intelligent Constructor Detection:** Only displays the "Constructor" section when a class has explicit constructor documentation, avoiding empty constructor sections for classes without custom constructors.
 - **🆕 Field-Level JSDoc Support:** Properties table is populated directly from `@type` annotations on individual class fields, eliminating the need for redundant `@property` tags in class-level JSDoc.
 - **🆕 Clean Member Organization:** Properties are displayed in their own dedicated section, while the "Members" section can be configured to show only methods, avoiding duplication.
+- **🆕 Enhanced Mixin Support:** Automatically displays methods inherited from mixin classes when using `@mixes` JSDoc tags, providing complete documentation of mixed-in functionality with proper inheritance attribution.
 - **🆕 Internationalization (i18n):** Full support for multiple languages with comprehensive translation of all UI elements, section headings, table headers, and navigation tooltips.
 - **🆕 Homepage Navigation:** Added a "Back to Homepage" button in the top navigation bar for easy navigation between class documentation and the main documentation index.
 - **🆕 Enhanced Tooltips:** All navigation buttons include internationalized tooltips that adapt to the selected language.
@@ -705,11 +706,31 @@ Don't forget to add the following in your jsdoc config file, otherwise toc will 
 
 ## Changelog
 
+### v1.4.0 (2025-01-XX)
+
+**Enhanced Mixin Documentation Support**
+
+#### 🔧 New Features
+- **Complete Mixin Method Documentation**: Automatically displays methods inherited from mixin classes when using `@mixes` JSDoc tags
+- **Proper Inheritance Attribution**: Methods from mixin classes are displayed with clear "Inherited from [MixinClass]" labels
+- **Full Method Documentation**: Includes complete parameter descriptions, return values, and method documentation from mixin classes
+- **Seamless Integration**: Works transparently with existing `@mixes` tags without requiring code changes
+
+#### 🛠️ Technical Improvements
+- **Enhanced Template Logic**: Updated `container.tmpl` to collect and display methods from mixed-in classes
+- **Dynamic Method Collection**: Automatically searches for methods in classes specified by `@mixes` tags
+- **Inheritance Flag Support**: Properly marks mixin methods as inherited for correct documentation formatting
+
+#### 📖 Documentation Updates
+- **Updated Examples**: Enhanced usage examples to demonstrate mixin documentation features
+- **Feature Documentation**: Added comprehensive documentation for the new mixin method display functionality
+
 ### v1.2.0 (2025-01-XX)
 
 **Major Update - Internationalization & Navigation Enhancements**
 
 #### 🌍 New Features
+- **Enhanced Mixin Documentation**: Automatic detection and display of methods inherited from mixin classes when using `@mixes` JSDoc tags, with proper "Inherited from" attribution
 - **Full Internationalization (i18n)**: Complete support for multiple languages with comprehensive translation system
 - **Homepage Navigation Button**: Added "Back to Homepage" button in top navigation bar for easy navigation
 - **Internationalized Tooltips**: All navigation buttons now include language-aware tooltips
