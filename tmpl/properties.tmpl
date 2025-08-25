@@ -1,109 +1,132 @@
 <?js
     var data = obj;
-    var props = data.subprops || data.properties;
+    var self = this;
 
-    /* sort subprops under their parent props (like opts.classname) */
-    var parentProp = null;
-    props.forEach(function(prop, i) {
-        if (!prop) { return; }
-        if ( parentProp && prop.name && prop.name.indexOf(parentProp.name + '.') === 0 ) {
-            prop.name = prop.name.substr(parentProp.name.length+1);
-            parentProp.subprops = parentProp.subprops || [];
-            parentProp.subprops.push(prop);
-            props[i] = null;
-        }
-        else {
-            parentProp = prop;
-        }
-    });
+    // Handle both old format (single properties array) and new format (static/instance separation)
+    var staticProps = data.staticProperties || [];
+    var instanceProps = data.instanceProperties || data.properties || [];
 
-    /* determine if we need extra columns, "attributes" and "default" */
-    props.hasAttributes = false;
-    props.hasDefault = false;
-    props.hasName = false;
+    // Function to render a properties table
+    function renderPropertiesTable(props, title) {
+        if (!props || props.length === 0) return '';
 
-    props.forEach(function(prop) {
-        if (!prop) { return; }
+        /* sort subprops under their parent props (like opts.classname) */
+        var parentProp = null;
+        props.forEach(function(prop, i) {
+            if (!prop) { return; }
+            if ( parentProp && prop.name && prop.name.indexOf(parentProp.name + '.') === 0 ) {
+                prop.name = prop.name.substr(parentProp.name.length+1);
+                parentProp.subprops = parentProp.subprops || [];
+                parentProp.subprops.push(prop);
+                props[i] = null;
+            }
+            else {
+                parentProp = prop;
+            }
+        });
 
-        if (prop.optional || prop.nullable) {
-            props.hasAttributes = true;
-        }
+        /* determine if we need extra columns, "attributes" and "default" */
+        props.hasAttributes = false;
+        props.hasDefault = false;
+        props.hasName = false;
 
-        if (prop.name) {
-            props.hasName = true;
-        }
-
-        if (typeof prop.defaultvalue !== 'undefined' && !data.isEnum) {
-            props.hasDefault = true;
-        }
-    });
-?>
-<div class="allow-overflow">
-<table class="props">
-    <thead>
-    <tr>
-        <?js if (props.hasName) {?>
-        <th><?js= t('name') ?></th>
-        <?js } ?>
-
-        <th><?js= t('type') ?></th>
-
-        <?js if (props.hasAttributes) {?>
-        <th><?js= t('attributes') ?></th>
-        <?js } ?>
-
-        <?js if (props.hasDefault) {?>
-        <th><?js= t('default') ?></th>
-        <?js } ?>
-
-        <th class="last"><?js= t('description') ?></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <?js
-        var self = this;
         props.forEach(function(prop) {
             if (!prop) { return; }
-    ?>
 
-        <tr>
-            <?js if (props.hasName) {?>
-                <td class="name"><code><?js= prop.name ?></code></td>
-            <?js } ?>
+            if (prop.optional || prop.nullable) {
+                props.hasAttributes = true;
+            }
 
-            <td class="type">
-            <?js if (prop.type && prop.type.names) {?>
-                <?js= self.partial('type.tmpl', prop.type.names) ?>
-            <?js } ?>
-            </td>
+            if (prop.name) {
+                props.hasName = true;
+            }
 
-            <?js if (props.hasAttributes) {?>
-                <td class="attributes">
-                <?js if (prop.optional) { ?>
-                    &lt;optional><br>
-                <?js } ?>
+            if (typeof prop.defaultvalue !== 'undefined' && !data.isEnum) {
+                props.hasDefault = true;
+            }
+        });
 
-                <?js if (prop.nullable) { ?>
-                    &lt;nullable><br>
-                <?js } ?>
-                </td>
-            <?js } ?>
+        var html = '';
+        if (title) {
+            html += '<h3 class="subsection-title">' + title + '</h3>';
+        }
 
-            <?js if (props.hasDefault) {?>
-                <td class="default">
-                <?js if (typeof prop.defaultvalue !== 'undefined') { ?>
-                    <?js= self.htmlsafe(prop.defaultvalue) ?>
-                <?js } ?>
-                </td>
-            <?js } ?>
+        html += '<div class="allow-overflow">';
+        html += '<table class="props">';
+        html += '<thead><tr>';
 
-            <td class="description last"><?js= prop.description ?><?js if (prop.subprops) { ?>
-                <h6>Properties</h6><?js= self.partial('properties.tmpl', prop) ?>
-            <?js } ?></td>
-        </tr>
+        if (props.hasName) {
+            html += '<th>' + t('name') + '</th>';
+        }
+        html += '<th>' + t('type') + '</th>';
 
-    <?js }); ?>
-    </tbody>
-</table>
-</div>
+        if (props.hasAttributes) {
+            html += '<th>' + t('attributes') + '</th>';
+        }
+
+        if (props.hasDefault) {
+            html += '<th>' + t('default') + '</th>';
+        }
+
+        html += '<th class="last">' + t('description') + '</th>';
+        html += '</tr></thead><tbody>';
+
+        props.forEach(function(prop) {
+            if (!prop) { return; }
+
+            html += '<tr>';
+
+            if (props.hasName) {
+                var nameDisplay = prop.name;
+                if (prop.accessType && prop.accessType !== 'property') {
+                    nameDisplay += ' <em>(' + prop.accessType + ')</em>';
+                }
+                html += '<td class="name"><code>' + nameDisplay + '</code></td>';
+            }
+
+            html += '<td class="type">';
+            if (prop.type && prop.type.names) {
+                html += self.partial('type.tmpl', prop.type.names);
+            }
+            html += '</td>';
+
+            if (props.hasAttributes) {
+                html += '<td class="attributes">';
+                if (prop.optional) {
+                    html += '&lt;optional><br>';
+                }
+                if (prop.nullable) {
+                    html += '&lt;nullable><br>';
+                }
+                html += '</td>';
+            }
+
+            if (props.hasDefault) {
+                html += '<td class="default">';
+                if (typeof prop.defaultvalue !== 'undefined') {
+                    html += self.htmlsafe(prop.defaultvalue);
+                }
+                html += '</td>';
+            }
+
+            html += '<td class="description last">' + (prop.description || '');
+            if (prop.subprops) {
+                html += '<h6>Properties</h6>' + self.partial('properties.tmpl', prop);
+            }
+            html += '</td>';
+
+            html += '</tr>';
+        });
+
+        html += '</tbody></table></div>';
+        return html;
+    }
+?>
+
+<?js if (staticProps.length > 0) { ?>
+    <?js= renderPropertiesTable(staticProps, '静态属性') ?>
+<?js } ?>
+
+<?js if (instanceProps.length > 0) { ?>
+    <?js= renderPropertiesTable(instanceProps, staticProps.length > 0 ? '实例属性' : null) ?>
+<?js } ?>
